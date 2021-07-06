@@ -16,9 +16,9 @@ type Transaction struct {
 }
 
 type TransactionRepository interface {
-	save_transaction(transaction Transaction, creditCard CreditCard) error
-	get_credit_card(creditCard CreditCard) (CreditCard, error)
-	new_credit_card(creditCard CreditCard) error
+	save_transaction(transaction Transaction, credit_card CreditCard) error
+	get_credit_card(credit_card CreditCard) (CreditCard, error)
+	new_credit_card(credit_card CreditCard) error
 }
 
 func new_transaction() *Transaction {
@@ -28,11 +28,11 @@ func new_transaction() *Transaction {
 	return transaction
 }
 
-func (transaction *Transaction) process_validade(creditCard *CreditCard) {
-	if transaction.amount+creditCard.balance > creditCard.limit {
+func (transaction *Transaction) process_validade(credit_card *CreditCard) {
+	if transaction.amount+credit_card.balance > credit_card.limit {
 		transaction.status = "rejected"
 	} else {
 		transaction.status = "approved"
-		creditCard.balance = creditCard.balance + transaction.amount
+		credit_card.balance = credit_card.balance + transaction.amount
 	}
 }
